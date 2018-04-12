@@ -141,6 +141,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-abstract class和interface" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/10/abstract class和interface/">abstract class和interface浅析</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/10/abstract class和interface/" class="archive-article-date">
+  	<time datetime="2018-04-10T10:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="理解Abstract-class和Interface"><a href="#理解Abstract-class和Interface" class="headerlink" title="理解Abstract class和Interface"></a>理解Abstract class和Interface</h1><hr>
+<h2 id="抽象类是什么"><a href="#抽象类是什么" class="headerlink" title="抽象类是什么"></a>抽象类是什么</h2><p>Java中的Abstract class和Interface都是用来定义某种抽象事物的，这两者和类这一概念的区别在于类可以实例化，而他们不能（类用来表示人类、鸭子等可以有实际映射的存在，而Abstract class和Interface用来表示物种这一不能实例化的概念）。<br>抽象体（即被Abstract和Interface定义的抽象事物）在实际编程中定义一类行为，却不对其做实际的描述，在继承或者实现中才涉及到具体的实现，也就是说，抽象体隐藏了具体的实现，而仅仅提供统一的接口，在实际实现中可以根据需要进行实现或者扩展。这符合面向对象设计原则中的”对修改封闭，对扩展开放”的原则。</p>
+<h2 id="语法上的区别"><a href="#语法上的区别" class="headerlink" title="语法上的区别"></a>语法上的区别</h2><p>abstract class Java语法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractClass</span> ｛ </span></span><br><span class="line"><span class="class">//阿里<span class="title">Java</span>规范推荐抽象类的名称命名规范应当用<span class="title">Abstract</span>开头</span></span><br><span class="line"><span class="class">//<span class="title">abstract</span>应当省略，默认当然是<span class="title">abstract</span>的</span></span><br><span class="line"><span class="class">    <span class="title">abstract</span> <span class="title">void</span> <span class="title">dosth1</span>()</span>;   </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dosth2</span><span class="params">()</span></span>;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure></p>
+<p>interfact Java语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">bloger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosth1</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosth2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中abstract class中可以拥有普通数据成员，而interface只能是static final的并且一般不推荐在interface中添加数据成员。<br>我理解为abstract class倾向于实现可以保留自己特性的，允许一定程度上不开放的抽象，而interface则是彻底的开发，甚至不允许拥有private的方法。</p>
+<h2 id="编程实践上的区别"><a href="#编程实践上的区别" class="headerlink" title="编程实践上的区别"></a>编程实践上的区别</h2><p>许多更早的书或者博客在分析abstract class和interface的区别时会提到是否允许方法的默认实现，在之前的Java版本中interface是不允许有默认实现的，但是在Java8中加入了interface的default方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">defaultable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">int</span> <span class="title">defaultMethod</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="设计模式上的使用"><a href="#设计模式上的使用" class="headerlink" title="设计模式上的使用"></a>设计模式上的使用</h2><p>abstract class和interface在使用上最大的区别应当是IS A 和 LIKE A 的区别，继承一个抽象类表示是什么，而实现一个接口仅仅表示实现了某个功能，即使在他们可以实现对方功能的情形下也应当明确区分其区别，这影响到代码的可维护性和可阅读性。<br>另一方面，Java是不支持多继承的，却可以同时实现多个接口，如果我们继承了某个抽象类，就应当表示子类在本质上属于父类（比如桌子属于家具），而接口的实现仅仅表示可以完成某种功能。也就是说，使用继承描述不会轻易改变的更本质的部分，而使用接口实现更灵活的扩展功能。 </p>
+<hr>
+<h3 id="–后续可能继续完善或更改错误，内容主要用于个人学习"><a href="#–后续可能继续完善或更改错误，内容主要用于个人学习" class="headerlink" title="–后续可能继续完善或更改错误，内容主要用于个人学习"></a>–后续可能继续完善或更改错误，内容主要用于个人学习</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">abstract class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">interface</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/10/abstract class和interface/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-blog-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -307,6 +397,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">abstract class</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interface</a>
               </li>
             
             <div class="clearfix"></div>

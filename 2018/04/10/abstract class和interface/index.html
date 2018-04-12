@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://fzwan.github.io">
-  <title>Tag: leetcode | fzwan&#39;s blog</title>
+  <title>abstract class和interface浅析 | fzwan&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java,开发者,代码,开源,Developer,Programmer,Coder,Geek,html,用户体验">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fzwan&#39;s blog">
-<meta property="og:url" content="http://fzwan.github.io/tags/leetcode/index.html">
+  <meta name="description" content="理解Abstract class和Interface 抽象类是什么Java中的Abstract class和Interface都是用来定义某种抽象事物的，这两者和类这一概念的区别在于类可以实例化，而他们不能（类用来表示人类、鸭子等可以有实际映射的存在，而Abstract class和Interface用来表示物种这一不能实例化的概念）。抽象体（即被Abstract和Interface定义的抽象事物">
+<meta name="keywords" content="Java,abstract class,interface">
+<meta property="og:type" content="article">
+<meta property="og:title" content="abstract class和interface浅析">
+<meta property="og:url" content="http://fzwan.github.io/2018/04/10/abstract class和interface/index.html">
 <meta property="og:site_name" content="fzwan&#39;s blog">
+<meta property="og:description" content="理解Abstract class和Interface 抽象类是什么Java中的Abstract class和Interface都是用来定义某种抽象事物的，这两者和类这一概念的区别在于类可以实例化，而他们不能（类用来表示人类、鸭子等可以有实际映射的存在，而Abstract class和Interface用来表示物种这一不能实例化的概念）。抽象体（即被Abstract和Interface定义的抽象事物">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-12T10:24:27.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fzwan&#39;s blog">
+<meta name="twitter:title" content="abstract class和interface浅析">
+<meta name="twitter:description" content="理解Abstract class和Interface 抽象类是什么Java中的Abstract class和Interface都是用来定义某种抽象事物的，这两者和类这一概念的区别在于类可以实例化，而他们不能（类用来表示人类、鸭子等可以有实际映射的存在，而Abstract class和Interface用来表示物种这一不能实例化的概念）。抽象体（即被Abstract和Interface定义的抽象事物">
   
     <link rel="alternative" href="/atom.xml" title="fzwan&#39;s blog" type="application/atom+xml">
   
@@ -139,60 +143,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-abstract class和interface" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/03/blog-test/" class="archive-article-date">
-  	<time datetime="2018-04-03T05:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/blog-test/">3Sum</a>
+    <h1 class="article-title" itemprop="name">
+      abstract class和interface浅析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/04/10/abstract class和interface/" class="archive-article-date">
+  	<time datetime="2018-04-10T10:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="理解Abstract-class和Interface"><a href="#理解Abstract-class和Interface" class="headerlink" title="理解Abstract class和Interface"></a>理解Abstract class和Interface</h1><hr>
+<h2 id="抽象类是什么"><a href="#抽象类是什么" class="headerlink" title="抽象类是什么"></a>抽象类是什么</h2><p>Java中的Abstract class和Interface都是用来定义某种抽象事物的，这两者和类这一概念的区别在于类可以实例化，而他们不能（类用来表示人类、鸭子等可以有实际映射的存在，而Abstract class和Interface用来表示物种这一不能实例化的概念）。<br>抽象体（即被Abstract和Interface定义的抽象事物）在实际编程中定义一类行为，却不对其做实际的描述，在继承或者实现中才涉及到具体的实现，也就是说，抽象体隐藏了具体的实现，而仅仅提供统一的接口，在实际实现中可以根据需要进行实现或者扩展。这符合面向对象设计原则中的”对修改封闭，对扩展开放”的原则。</p>
+<h2 id="语法上的区别"><a href="#语法上的区别" class="headerlink" title="语法上的区别"></a>语法上的区别</h2><p>abstract class Java语法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractClass</span> ｛ </span></span><br><span class="line"><span class="class">//阿里<span class="title">Java</span>规范推荐抽象类的名称命名规范应当用<span class="title">Abstract</span>开头</span></span><br><span class="line"><span class="class">//<span class="title">abstract</span>应当省略，默认当然是<span class="title">abstract</span>的</span></span><br><span class="line"><span class="class">    <span class="title">abstract</span> <span class="title">void</span> <span class="title">dosth1</span>()</span>;   </span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">dosth2</span><span class="params">()</span></span>;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure></p>
+<p>interfact Java语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">bloger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosth1</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dosth2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中abstract class中可以拥有普通数据成员，而interface只能是static final的并且一般不推荐在interface中添加数据成员。<br>我理解为abstract class倾向于实现可以保留自己特性的，允许一定程度上不开放的抽象，而interface则是彻底的开发，甚至不允许拥有private的方法。</p>
+<h2 id="编程实践上的区别"><a href="#编程实践上的区别" class="headerlink" title="编程实践上的区别"></a>编程实践上的区别</h2><p>许多更早的书或者博客在分析abstract class和interface的区别时会提到是否允许方法的默认实现，在之前的Java版本中interface是不允许有默认实现的，但是在Java8中加入了interface的default方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">defaultable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">int</span> <span class="title">defaultMethod</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="设计模式上的使用"><a href="#设计模式上的使用" class="headerlink" title="设计模式上的使用"></a>设计模式上的使用</h2><p>abstract class和interface在使用上最大的区别应当是IS A 和 LIKE A 的区别，继承一个抽象类表示是什么，而实现一个接口仅仅表示实现了某个功能，即使在他们可以实现对方功能的情形下也应当明确区分其区别，这影响到代码的可维护性和可阅读性。<br>另一方面，Java是不支持多继承的，却可以同时实现多个接口，如果我们继承了某个抽象类，就应当表示子类在本质上属于父类（比如桌子属于家具），而接口的实现仅仅表示可以完成某种功能。也就是说，使用继承描述不会轻易改变的更本质的部分，而使用接口实现更灵活的扩展功能。 </p>
+<hr>
+<h3 id="–后续可能继续完善或更改错误，内容主要用于个人学习"><a href="#–后续可能继续完善或更改错误，内容主要用于个人学习" class="headerlink" title="–后续可能继续完善或更改错误，内容主要用于个人学习"></a>–后续可能继续完善或更改错误，内容主要用于个人学习</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>ThankYou!!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">abstract class</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">interface</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://fzwan.github.io/2018/04/10/abstract class和interface/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/03/blog-test/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3Sum</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
 
 
           </div>
@@ -215,9 +332,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
