@@ -161,7 +161,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="简析GenericApplicationContext"><a href="#简析GenericApplicationContext" class="headerlink" title="简析GenericApplicationContext"></a>简析GenericApplicationContext</h1><p>Spring framework org.springframework.context包下提供了多种AbstractApplicationContext的实现，其中有几种比较常用的实现如下<br>常用ApplicationContext实现 | 说明<br>—|—<br><strong>FileSystemXmlApplicationContext</strong> |从XML文件加载被定义的bean，访问路径为系统文件路径如C://beans.xml<br><strong>ClassPathXmlApplicationContext</strong>|从XML文件加载被定义的bean，提供Classpath路径的ApplicationContext<br><strong>WebXmlApplicationContext</strong>|从XML文件加载被定义的bean，加载路径基于整个Web工程<br>以上的几种AbstractApplicationContext实现的主要区别在于加载Xml定义文件的路径不同，但是加载bean的format都是XML的，且文件路径的表示方式单一，不能灵活改动。</p>
+        <h1 id="简析GenericApplicationContext"><a href="#简析GenericApplicationContext" class="headerlink" title="简析GenericApplicationContext"></a>简析GenericApplicationContext</h1><p>Spring framework org.springframework.context包下提供了多种AbstractApplicationContext的实现，其中有几种比较常用的实现如下<br>常用ApplicationContext实现<br><strong>FileSystemXmlApplicationContext</strong> | (从XML文件加载被定义的bean，访问路径为系统文件路径如C://beans.xml<br><strong>ClassPathXmlApplicationContext</strong> | (从XML文件加载被定义的bean，提供Classpath路径的ApplicationContext<br><strong>WebXmlApplicationContext</strong> | (从XML文件加载被定义的bean，加载路径基于整个Web工程<br>以上的几种AbstractApplicationContext实现的主要区别在于加载Xml定义文件的路径不同，但是加载bean的format都是XML的，且文件路径的表示方式单一，不能灵活改动。</p>
 <hr>
 <h2 id="从源码中的说明理解本类的特点和作用"><a href="#从源码中的说明理解本类的特点和作用" class="headerlink" title="从源码中的说明理解本类的特点和作用"></a>从源码中的说明理解本类的特点和作用</h2><blockquote>
 <p>Generic ApplicationContext implementation that holds a single internal DefaultListableBeanFactory instance and does not assume a specific bean definition format. Implements the BeanDefinitionRegistry interface in order to allow for applying any bean definition readers to it.<br>Generic ApplicationContext 持有一个DefaultListableBeanFactory实例，并且没有假设一个特定的bean definition 的format。实现了BeanDefinitionRegistry接口以允许配置任何bean definition reader（也可以不是XmlBeanDefinitionReader）。</p>
@@ -505,14 +505,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">abstract class</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">interface</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Spring源码</a>
               </li>
              
@@ -526,6 +518,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">abstract class</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interface</a>
               </li>
              
               <li class="article-tag-list-item">
