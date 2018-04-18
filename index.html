@@ -141,6 +141,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-简析genericapplicationcontext" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/18/简析genericapplicationcontext/">简析GenericApplicationContext</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/18/简析genericapplicationcontext/" class="archive-article-date">
+  	<time datetime="2018-04-18T04:32:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简析GenericApplicationContext"><a href="#简析GenericApplicationContext" class="headerlink" title="简析GenericApplicationContext"></a>简析GenericApplicationContext</h1><p>Spring framework org.springframework.context包下提供了多种AbstractApplicationContext的实现，其中有几种比较常用的实现如下<br>常用ApplicationContext实现 | 说明<br>—|—<br><strong>FileSystemXmlApplicationContext</strong> |从XML文件加载被定义的bean，访问路径为系统文件路径如C://beans.xml<br><strong>ClassPathXmlApplicationContext</strong>|从XML文件加载被定义的bean，提供Classpath路径的ApplicationContext<br><strong>WebXmlApplicationContext</strong>|从XML文件加载被定义的bean，加载路径基于整个Web工程<br>以上的几种AbstractApplicationContext实现的主要区别在于加载Xml定义文件的路径不同，但是加载bean的format都是XML的，且文件路径的表示方式单一，不能灵活改动。</p>
+<hr>
+<h2 id="从源码中的说明理解本类的特点和作用"><a href="#从源码中的说明理解本类的特点和作用" class="headerlink" title="从源码中的说明理解本类的特点和作用"></a>从源码中的说明理解本类的特点和作用</h2><blockquote>
+<p>Generic ApplicationContext implementation that holds a single internal DefaultListableBeanFactory instance and does not assume a specific bean definition format. Implements the BeanDefinitionRegistry interface in order to allow for applying any bean definition readers to it.<br>Generic ApplicationContext 持有一个DefaultListableBeanFactory实例，并且没有假设一个特定的bean definition 的format。实现了BeanDefinitionRegistry接口以允许配置任何bean definition reader（也可以不是XmlBeanDefinitionReader）。</p>
+</blockquote>
+<blockquote>
+<p>Typical usage is to register a variety of bean definitions via the BeanDefinitionRegistry interface and then call AbstractApplicationContext.refresh() to initialize those beans with application context semantics (handling ApplicationContextAware, auto-detecting BeanFactoryPostProcessors, etc).<br>使用时通常要通过BeandefinitionRegistry接口注册一些bean definition然后调用AbstractApplicationContext.refresh()用application context的语义来初始化beans（如ApplicationContextAware和auto-detecting BeanFactoryPostProcessors等）。</p>
+</blockquote>
+<blockquote>
+<p>In contrast to other ApplicationContext implementations that create a new internal BeanFactory instance for each refresh, the internal BeanFactory of this context is available right from the start, to be able to register bean definitions on it. AbstractApplicationContext.refresh() may only be called once.<br>和其他在每次refresh时都创建一个新的内部BeanFactory实例的ApplicationContext实例不同，本类中的BeanFactory从一开始就创建好并可在其中注册bean definitions，refresh方法可能在其中只调用一次</p>
+</blockquote>
+<p>使用示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GenericApplicationContext ctx = <span class="keyword">new</span> GenericApplicationContext();</span><br><span class="line"><span class="comment">//使用XmlBeanDefinitionReader</span></span><br><span class="line">XmlBeanDefinitionReader xmlReader = <span class="keyword">new</span> XmlBeanDefinitionReader(ctx);</span><br><span class="line"><span class="comment">//加载ClassPathResource</span></span><br><span class="line">xmlReader.loadBeanDefinitions(<span class="keyword">new</span> ClassPathResource(<span class="string">"applicationContext.xml"</span>));</span><br><span class="line">PropertiesBeanDefinitionReader propReader = <span class="keyword">new</span> PropertiesBeanDefinitionReader(ctx);</span><br><span class="line">propReader.loadBeanDefinitions(<span class="keyword">new</span> ClassPathResource(<span class="string">"otherBeans.properties"</span>));</span><br><span class="line"><span class="comment">//调用Refresh方法</span></span><br><span class="line">ctx.refresh();</span><br><span class="line"></span><br><span class="line"><span class="comment">//和其他ApplicationContext方法一样的使用方式</span></span><br><span class="line">MyBean myBean = (MyBean) ctx.getBean(<span class="string">"myBean"</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>For the typical case of XML bean definitions, simply use ClassPathXmlApplicationContext or FileSystemXmlApplicationContext, which are easier to set up - but less flexible, since you can just use standard resource locations for XML bean definitions, rather than mixing arbitrary bean definition formats. The equivalent in a web environment is XmlWebApplicationContext.<br>For custom application context implementations that are supposed to read special bean definition formats in a refreshable manner, consider deriving from the AbstractRefreshableApplicationContext base class.<br>一般情况下使用ClassPathXmlApplicationContext或者FileSystemXmlApplicationContext会比这个GenericApplicationContext更方便但相应地缺少灵活性，因为只能使用特定Bean definition 格式和加载路径。<br>要追求定制化的ApplicationContext实现，请阅读refreshable的说明中特殊bean definition 的格式，可从AbstractRefreshableApplicationContext继承。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>GenericApplicationContext不是比较常用的ApplicationContext实现，但是更具灵活性，可以任意配置读取路径和DefinitionReader，如果还需要比使用GenericApplicationContext更具灵活性的方式，还可以从比它更抽象的类来继承。总之，为了获得更多的灵活性，就要把框架本身拆得更散，框架本身也会提供合适的扩展方式来适应这种需求。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Spring源码</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Spring-beans</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IOC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/18/简析genericapplicationcontext/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-abstract class和interface" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -396,10 +501,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -409,6 +510,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">interface</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Spring源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Spring-beans</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">leetcode</a>
               </li>
             
             <div class="clearfix"></div>
